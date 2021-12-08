@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Day1.read();
+        //Day1.read();
         //System.out.println(Day1.ejercio1());
         //Day1.ejercio2();
         //Day2.dive();
@@ -25,7 +25,7 @@ public class Main {
         //new Day5();
         //new Day6();
         //new Day7();
-        new Day8();
+        //new Day8();
 
     }
 }
