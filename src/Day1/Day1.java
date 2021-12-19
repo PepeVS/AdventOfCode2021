@@ -12,30 +12,35 @@ public class Day1 {
     private static final ArrayList<Integer> listDay1 = new ArrayList<>();
     private static final ArrayList<String> listDay1Aux = new ArrayList<>();
 
-    public static void read () throws IOException {
+    public static void leer() throws IOException {
         File file;
         FileReader fr;
         BufferedReader br;
+        String linea;
 
+        //cargamos el fichero para trabajar con el
         file = new File ("src/Day1/Day1");
         fr = new FileReader (file);
         br = new BufferedReader(fr);
 
-        // Lectura del fichero
-        String linea;
+
+        //Leemos el fichero
         while((linea=br.readLine())!=null) {
             listDay1Aux.add(linea);
         }
 
-        for(String s : listDay1Aux) listDay1.add(Integer.valueOf(s));
+        for(String s : listDay1Aux) {
+            listDay1.add(Integer.valueOf(s));
+        }
 
     }
 
     public static int ejercio1 () {
         int aux = 0;
-        for (int i = 0; i < listDay1.size(); i++) {
+        int i;
+        for (i = 0; i < listDay1.size(); i++) {
             if (i > 0) {
-                if (listDay1.get(i) > listDay1.get(i - 1)){
+                if (listDay1.get(i) > listDay1.get(i-1)){
                     aux++;
                 }
             }
@@ -43,42 +48,41 @@ public class Day1 {
         return aux;
     }
 
-    public static void ejercio2 () {
-        int countIncrease = 0;
-        int[] lastNumbers = new int[3];
-        int[] currentNumbers = new int[3];
-        int startCount = 0;
+    public static int ejercio2 () {
+        int aumento = 0;
+        int[] ultimos = new int[3];
+        int[] actuales = new int[3];
+        int contador = 0;
 
         for (int i = 0; i < listDay1.size(); i++) {
-            if (startCount < 3) {
-                if (startCount > 0) {
-                    currentNumbers[startCount - 1] = listDay1.get(i);
+            if (contador < 3) {
+                if (contador > 0) {
+                    actuales[contador - 1] = listDay1.get(i);
                 }
-                lastNumbers[startCount] = listDay1.get(i);
-                startCount++;
-                continue;
+                ultimos[contador] = listDay1.get(i);
+                contador++;
             }
 
-            currentNumbers[2] = listDay1.get(i);
+            actuales[2] = listDay1.get(i);
 
-            int curr = 0;
-            int last = 0;
+            int act = 0;
+            int ult = 0;
             for (int j = 0; j < 3; j++) {
-                last += lastNumbers[j];
-                curr += currentNumbers[j];
+                ult += ultimos[j];
+                act += actuales[j];
             }
 
-            if (curr > last) {
-                countIncrease++;
+            if (act > ult) {
+                aumento++;
             }
 
-            lastNumbers = Arrays.copyOf(currentNumbers, 3);
+            ultimos = Arrays.copyOf(actuales, 3);
 
             for (int j = 0; j < 2; j++) {
-                currentNumbers[j] = currentNumbers[j + 1];
+                actuales[j] = actuales[j+1];
             }
         }
-        System.out.println(countIncrease);
+        return aumento;
 
     }
 

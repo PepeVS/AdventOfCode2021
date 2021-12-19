@@ -1,11 +1,6 @@
 import Day1.Day1;
-import Day2.Day2;
-import Day3.Day3;
-import Day4.Day4;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 
 public class Main {
@@ -13,17 +8,16 @@ public class Main {
     public static void main(String[] args) throws IOException {
         int day, exercice;
         View vw = new View();
-
         day = vw.SeleccionarDia();
 
         switch (day){
             case 1 :
+                Day1.leer();
                 exercice = vw.SeleccionarEjercicio();
                 if(exercice == 1){
-                    Day1.read();
                     System.out.println(Day1.ejercio1());
                 }else{
-
+                    System.out.println(Day1.ejercio2());
                 }
                 break; // break es opcional
 
@@ -33,8 +27,6 @@ public class Main {
             default :
 
         }
-
-        //Day1.ejercio2();
         //Day2.dive();
         //Day2.divPartTwo();
         //Day3.binaryDiagnostic();
