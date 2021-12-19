@@ -9,16 +9,16 @@ import java.util.Arrays;
 
 public class Day1 {
 
-    private static final ArrayList<String> listDay1Aux = new ArrayList<>();
     private static final ArrayList<Integer> listDay1 = new ArrayList<>();
+    private static final ArrayList<String> listDay1Aux = new ArrayList<>();
 
     public static void read () throws IOException {
-        File archivo = null;
-        FileReader fr = null;
-        BufferedReader br = null;
+        File file;
+        FileReader fr;
+        BufferedReader br;
 
-        archivo = new File ("src/Day1/Day1");
-        fr = new FileReader (archivo);
+        file = new File ("src/Day1/Day1");
+        fr = new FileReader (file);
         br = new BufferedReader(fr);
 
         // Lectura del fichero

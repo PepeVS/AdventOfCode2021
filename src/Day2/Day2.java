@@ -13,7 +13,6 @@ public class Day2 {
 
         String line;
         while ((line = br.readLine()) != null) {
-            //for (String line : data.split("\n")) {
             String[] arg = line.split(" ");
             String cmd = arg[0];
             int amount = Integer.parseInt(arg[1]);

@@ -2,19 +2,38 @@ import Day1.Day1;
 import Day2.Day2;
 import Day3.Day3;
 import Day4.Day4;
-import Day5.Day5;
-import Day6.Day6;
-import Day7.Day7;
-import Day8.Day8;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
+
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        //Day1.read();
-        //System.out.println(Day1.ejercio1());
+        int day, exercice;
+        View vw = new View();
+
+        day = vw.SeleccionarDia();
+
+        switch (day){
+            case 1 :
+                exercice = vw.SeleccionarEjercicio();
+                if(exercice == 1){
+                    Day1.read();
+                    System.out.println(Day1.ejercio1());
+                }else{
+
+                }
+                break; // break es opcional
+
+            case 2 :
+                // Declaraciones
+                break; // break es opcional
+            default :
+
+        }
+
         //Day1.ejercio2();
         //Day2.dive();
         //Day2.divPartTwo();
