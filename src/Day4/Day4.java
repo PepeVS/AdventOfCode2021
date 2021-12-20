@@ -8,41 +8,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day4 {
-    public static void giantSquid () throws IOException {
+    public static void ejercicio1 () throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/Day4/Day4"));
 
-        int lineNum = 0;
-        String line;
-        String numbers = "";
-        List<BingoBoard> boards = new ArrayList<>();
+        int num = 0;
+        String linia;
+        String numeros = "";
+        List<BingoBoard> tableros = new ArrayList<>();
         BingoBoard currentBoard = null;
 
-        while ((line = br.readLine()) != null) {
-            if (lineNum == 0) {
-                numbers = line;
-                lineNum++;
+        while ((linia = br.readLine()) != null) {
+            if (num == 0) {
+                numeros = linia;
+                num++;
                 continue;
             }
-            if (line.isBlank()) {
+            if (linia.isBlank()) {
                 if (currentBoard != null) {
-                    boards.add(currentBoard);
+                    tableros.add(currentBoard);
                 }
                 currentBoard = new BingoBoard();
                 continue;
             }
 
-            currentBoard.addLine(line);
+            currentBoard.addLine(linia);
 
-            lineNum++;
+            num++;
         }
 
         if (currentBoard != null) {
-            boards.add(currentBoard);
+            tableros.add(currentBoard);
         }
 
-        for (String num: numbers.split(",")) {
-            int numInt = Integer.parseInt(num);
-            for (BingoBoard b: boards) {
+        for (String number: numeros.split(",")) {
+            int numInt = Integer.parseInt(number);
+            for (BingoBoard b: tableros) {
                 if (b.addNum(numInt)) {
                     System.out.println(b.caloWinningBoard(numInt));
                     System.exit(0);
@@ -54,7 +54,7 @@ public class Day4 {
 
     }
 
-    public static void giantSquidPartTwo () throws IOException {
+    public static void ejercicio2 () throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/Day4/Day4"));
 
         int lineNum = 0;
