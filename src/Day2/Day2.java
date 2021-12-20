@@ -4,40 +4,43 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Day2 {
-    public static void ex1 () throws IOException {
+    public static int ex1 () throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/Day2/Day2"));
 
         int depth = 0;
         int horizontal = 0;
         int aim = 0;
+        int acumulado;
+        int total;
+        String linia;
 
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] arg = line.split(" ");
+        while ((linia = br.readLine()) != null) {
+            String[] arg = linia.split(" ");
             String cmd = arg[0];
-            int amount = Integer.parseInt(arg[1]);
+            acumulado = Integer.parseInt(arg[1]);
             switch (cmd) {
                 case "forward" -> {
-                    horizontal += amount;
+                    horizontal += acumulado;
                     depth = aim;
                 }
-                case "down" -> aim += amount;
-                case "up" -> aim -= amount;
+                case "down" -> aim += acumulado;
+                case "up" -> aim -= acumulado;
             }
         }
-        System.out.println("horizontal: " + horizontal);
-        System.out.println("depth: " + depth);
 
-        System.out.println(depth * horizontal);
+        total = depth * horizontal;
+
+        return total;
     }
 
-    public static void ex2 () throws IOException {
+    public static int ex2 () throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/Day2/Day2"));
 
         int interior = 0;
         int horizontal = 0;
         int puntero = 0;
         int acumulado;
+        int total;
         String linia;
         while ((linia = br.readLine()) != null) {
             String[] arg = linia.split(" ");
@@ -52,9 +55,9 @@ public class Day2 {
                 case "up" -> puntero -= acumulado;
             }
         }
-        System.out.println("horizontal: " + horizontal);
-        System.out.println("depth: " + interior);
 
-        System.out.println(interior * horizontal);
+        total = interior * horizontal;
+
+        return total;
     }
 }

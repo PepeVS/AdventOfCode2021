@@ -1,4 +1,5 @@
 import Day1.Day1;
+import Day2.Day2;
 
 import java.io.IOException;
 
@@ -19,16 +20,21 @@ public class Main {
                 }else{
                     System.out.println(Day1.ejercio2());
                 }
-                break; // break es opcional
+                break;
 
             case 2 :
-                // Declaraciones
+                exercice = vw.SeleccionarEjercicio();
+                if(exercice == 1){
+                    System.out.println(Day2.ex1());
+                }else{
+                    System.out.println(Day2.ex2());
+                }
                 break; // break es opcional
             default :
 
         }
-        //Day2.dive();
-        //Day2.divPartTwo();
+        //Day2.ex1();
+        //Day2.ex2();
         //Day3.binaryDiagnostic();
         //Day3.binaryDiagnosticPartTwo();
         //Day4.giantSquid();
