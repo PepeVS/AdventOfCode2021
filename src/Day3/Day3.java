@@ -9,109 +9,118 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Day3 {
-    public static void binaryDiagnostic () throws IOException {
+    public static int ejercicio1 () throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/Day3/Day3"));
-        int [] positiveBitsCount = new int[12];
-        int [] negativeBitsCount = new int[12];
-        String line;
-        while ((line = br.readLine()) != null) {
-            String [] lineArr = line.split("");
+        int n=12;
+        int [] positius = new int[n];
+        int [] negatius = new int[n];
+        int total;
+        String linia;
+        String mas = "";
+        String menos = "";
+
+
+        while ((linia = br.readLine()) != null) {
+            String [] arrayAux = linia.split("");
             int i = 0;
-            for (String s: lineArr) {
+            for (String s: arrayAux) {
                if (s.equals("1")) {
-                   positiveBitsCount[i]++;
+                   positius[i]++;
                } else {
-                   negativeBitsCount[i]++;
+                   negatius[i]++;
                }
                i++;
             }
         }
 
-        String most = "";
-        String least = "";
-
-        for (int i = 0; i < positiveBitsCount.length; i++) {
-            if (positiveBitsCount[i] > negativeBitsCount[i]) {
-                most += "1";
-                least += "0";
+        for (int i = 0; i < n; i++) {
+            if (positius[i] > negatius[i]) {
+                mas += "1";
+                menos += "0";
             } else {
-                most += "0";
-                least += "1";
+                mas += "0";
+                menos += "1";
             }
         }
 
-        BigInteger mostNumber = new BigInteger(most, 2);
-        BigInteger leastNumber = new BigInteger(least, 2);
+        BigInteger mayor = new BigInteger(mas, 2);
+        BigInteger menor = new BigInteger(menos, 2);
 
-        System.out.println(mostNumber.intValue() * leastNumber.intValue());
-
+        total = mayor.intValue() * menor.intValue();
+        return total;
     }
 
-    private static String getValue (List<String> newData, String selectCritera, boolean keepMost) {
-        int i = 0;
+    private static String getValor (List<String> datos, String seleccion, boolean mayor) {
+        int positivo;
+        int negativo;
+        int contador = 0;
+        List<String> arrayAux;
+        String seleccionAux;
 
-        while (newData.size() > 1) {
-            int positive = 0;
-            int negative = 0;
+        while (datos.size() > 1) {
+            positivo = 0;
+            negativo = 0;
 
-            for (String line : newData) {
+            for (String line : datos) {
                 String [] lineArr = line.split("");
-                String s = lineArr[i];
-                if (s.equals("1")) {
-                    positive++;
+                String l = lineArr[contador];
+                if (l.equals("1")) {
+                    positivo++;
                 } else {
-                    negative++;
+                    negativo++;
                 }
             }
 
-            String keepCriteria = selectCritera;
+            seleccionAux= seleccion;
 
-            if (positive > negative) {
-                if (keepMost) {
-                    keepCriteria = "1";
+            if (positivo > negativo) {
+                if (mayor) {
+                    seleccionAux = "1";
                 } else {
-                    keepCriteria = "0";
+                    seleccionAux = "0";
                 }
-            } else if (positive < negative) {
-                if (keepMost) {
-                    keepCriteria = "0";
+            }
+            if (positivo < negativo) {
+                if (mayor) {
+                    seleccionAux = "0";
                 } else {
-                    keepCriteria = "1";
+                    seleccionAux = "1";
                 }
             }
 
-            List<String> keepList = new ArrayList<>();
+            arrayAux = new ArrayList<>();
 
-            for (String line: newData) {
+            for (String line: datos) {
                 String [] lineArr = line.split("");
-                String val = lineArr[i];
-                if (val.equals(keepCriteria )) {
-                    keepList.add(line);
+                String val = lineArr[contador];
+                if (val.equals(seleccionAux)) {
+                    arrayAux.add(line);
                 }
             }
-
-            newData = keepList;
-            i++;
+            datos = arrayAux;
+            contador++;
         }
-        return newData.get(0);
-
+        return datos.get(0);
     }
 
-    public static void binaryDiagnosticPartTwo () throws IOException {
+    public static int ejercicio2 () throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/Day3/Day3"));
-        List<String> newData = new ArrayList<>();
+        List<String> datos = new ArrayList<>();
+        String linia;
+        int total;
 
-        String line;
-        while ((line = br.readLine()) != null) {
-            newData.add(line);
+        while ((linia = br.readLine()) != null) {
+            datos.add(linia);
         }
 
-        String oxygenGenerator = getValue(newData, "1", true);
-        String CO2scrubber = getValue(newData, "0", false);
+        String oxigeno = getValor(datos, "1", true);
+        String co2 = getValor(datos, "0", false);
 
-        BigInteger oxygenGeneratorNumber = new BigInteger(oxygenGenerator, 2);
-        BigInteger CO2scrubberNumber = new BigInteger(CO2scrubber, 2);
+        BigInteger oxigeno_number = new BigInteger(oxigeno, 2);
+        BigInteger co2_number = new BigInteger(co2, 2);
 
-        System.out.println(oxygenGeneratorNumber.intValue() * CO2scrubberNumber.intValue());
+        total = oxigeno_number.intValue() * co2_number.intValue();
+
+        return total;
     }
 }

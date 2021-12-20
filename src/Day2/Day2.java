@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Day2 {
-    public static int ex1 () throws IOException {
+    public static int ejercicio1() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/Day2/Day2"));
 
         int depth = 0;
@@ -33,7 +33,7 @@ public class Day2 {
         return total;
     }
 
-    public static int ex2 () throws IOException {
+    public static int ejercicio2 () throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/Day2/Day2"));
 
         int interior = 0;
@@ -42,6 +42,7 @@ public class Day2 {
         int acumulado;
         int total;
         String linia;
+
         while ((linia = br.readLine()) != null) {
             String[] arg = linia.split(" ");
             String cmd = arg[0];
