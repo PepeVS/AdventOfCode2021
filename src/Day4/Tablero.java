@@ -18,84 +18,97 @@ public class Tablero {
 
     public boolean addNum (int num) {
         int posicion = -1;
-        boolean breack = false;
+        boolean addNumero = false;
+        int columna, fila;
+        int contador;
         do{
             posicion++;
             if(tablero[posicion] == num){
                 tablero[posicion] = -num;
             }
         }while(tablero[posicion] != num);
-        if (posicion > 24) return false;
 
-        int column = posicion % 5;
-        int row = Math.floorDiv(posicion, 5);
+        if (posicion <= 24) {
 
-        int count = 0;
-        for (int i = 0; i < 5; i++) {
-            count += tablero[row * 5 + i] < 0 ? 1 : 0;
-        }
-        if (count == 5) {
-            return true;
-        }
+            columna = posicion % 5;
+            fila = Math.floorDiv(posicion, 5);
 
-        count = 0;
-        for (int i = 0; i < 5; i++) {
-            count += tablero[i * 5 + column] < 0 ? 1 : 0;
+            contador = 0;
+            for (int i = 0; i < 5; i++) {
+                contador += tablero[fila * 5 + i] < 0 ? 1 : 0;
+            }
+            if (contador == 5) {
+                addNumero = true;
+            }else{
+                contador = 0;
+                for (int i = 0; i < 5; i++) {
+                    contador += tablero[i * 5 + columna] < 0 ? 1 : 0;
+                }
+                if (contador == 5) {
+                    addNumero = true;
+                }else{
+                    addNumero = false;
+                }
+            }
         }
-        if (count == 5) {
-            return true;
-        }
-
-        return false;
+        return addNumero;
     }
     public boolean addNum2 (int num) {
-        if (hasWon) return false;
-        int pos = 0;
-        for (int b: tablero){
-            if (b == num) {
-                if (num > 0) {
-                    tablero[pos] = -num;
-                } else {
-                    tablero[pos] = Integer.MIN_VALUE;
+        boolean addNumero = false;
+        int posicion = -1;
+        int columna, fila;
+        if (!hasWon){
+
+            do{
+                posicion++;
+                if(tablero[posicion] == num){
+                    if (num > 0) {
+                        tablero[posicion] = -num;
+                    } else {
+                        tablero[posicion] = Integer.MIN_VALUE;
+                    }
                 }
-                break;
+            }while(tablero[posicion] != num);
+
+            if (posicion <= 24) {
+                columna = posicion % 5;
+                fila = Math.floorDiv(posicion, 5);
+
+                int count = 0;
+                for (int i = 0; i < 5; i++) {
+                    count += tablero[fila * 5 + i] < 0 ? 1 : 0;
+                }
+                if (count == 5) {
+                    hasWon = true;
+                    addNumero = true;
+                }else {
+                    count = 0;
+                    for (int i = 0; i < 5; i++) {
+                        count += tablero[i * 5 + columna] < 0 ? 1 : 0;
+                    }
+                    if (count == 5) {
+                        hasWon = true;
+                        addNumero= true;
+                    }else{
+                        addNumero =false;
+                    }
+                }
+            }else{
+                addNumero =false;
             }
-            pos++;
         }
-
-        if (pos > 24) return false;
-
-        int column = pos % 5;
-        int row = Math.floorDiv(pos, 5);
-
-        int count = 0;
-        for (int i = 0; i < 5; i++) {
-            count += tablero[row * 5 + i] < 0 ? 1 : 0;
-        }
-        if (count == 5) {
-            hasWon = true;
-            return true;
-        }
-
-        count = 0;
-        for (int i = 0; i < 5; i++) {
-            count += tablero[i * 5 + column] < 0 ? 1 : 0;
-        }
-        if (count == 5) {
-            hasWon = true;
-            return true;
-        }
-
-        return false;
+        return addNumero;
     }
 
     public int caloWinningBoard (int lastNum) {
-        int count = 0;
+        int contador = 0;
+        int total;
         for (int i = 0; i < 25; i++) {
             if (tablero[i] > 0) {
-                count += tablero[i];
+                contador += tablero[i];
             }
         }
-        return count * lastNum;
+        total = contador * lastNum;
+        return total;
     }
 }

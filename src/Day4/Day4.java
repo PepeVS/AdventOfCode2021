@@ -10,7 +10,6 @@ import java.util.List;
 public class Day4 {
     public static void ejercicio1 () throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/Day4/Day4"));
-
         int num = 0;
         String linia;
         String numeros = "";
