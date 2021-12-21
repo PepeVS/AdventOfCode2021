@@ -13,8 +13,8 @@ public class Day4 {
         int num = 0;
         String linia;
         String numeros = "";
-        List<BingoBoard> tableros = new ArrayList<>();
-        BingoBoard currentBoard = null;
+        List<Tablero> tableros = new ArrayList<>();
+        Tablero currentBoard = null;
 
         while ((linia = br.readLine()) != null) {
             if (num == 0) {
@@ -26,11 +26,11 @@ public class Day4 {
                 if (currentBoard != null) {
                     tableros.add(currentBoard);
                 }
-                currentBoard = new BingoBoard();
+                currentBoard = new Tablero();
                 continue;
             }
 
-            currentBoard.addLine(linia);
+            currentBoard.addLinia(linia);
 
             num++;
         }
@@ -41,7 +41,7 @@ public class Day4 {
 
         for (String number: numeros.split(",")) {
             int numInt = Integer.parseInt(number);
-            for (BingoBoard b: tableros) {
+            for (Tablero b: tableros) {
                 if (b.addNum(numInt)) {
                     System.out.println(b.caloWinningBoard(numInt));
                     System.exit(0);
@@ -59,8 +59,8 @@ public class Day4 {
         int lineNum = 0;
         String line;
         String numbers = "";
-        List<BingoBoard> boards = new ArrayList<>();
-        BingoBoard currentBoard = null;
+        List<Tablero> boards = new ArrayList<>();
+        Tablero currentBoard = null;
 
         while ((line = br.readLine()) != null) {
             if (lineNum == 0) {
@@ -72,11 +72,11 @@ public class Day4 {
                 if (currentBoard != null) {
                     boards.add(currentBoard);
                 }
-                currentBoard = new BingoBoard();
+                currentBoard = new Tablero();
                 continue;
             }
 
-            currentBoard.addLine(line);
+            currentBoard.addLinia(line);
 
             lineNum++;
         }
@@ -85,14 +85,14 @@ public class Day4 {
             boards.add(currentBoard);
         }
 
-        BingoBoard winningBoard = null;
+        Tablero winningBoard = null;
         int winningNum = 0;
         int numOfWinningBoards = 0;
 
         outerloop:
         for (String num: numbers.split(",")) {
             int numInt = Integer.parseInt(num);
-            for (BingoBoard b: boards) {
+            for (Tablero b: boards) {
                 if (b.addNum2(numInt)) {
                     winningBoard = b;
                     winningNum = numInt;
@@ -100,8 +100,6 @@ public class Day4 {
                     if (numOfWinningBoards == boards.size()) {
                         break outerloop;
                     }
-                    //System.out.println(b.caloWinningBoard(numInt));
-                    //System.exit(0);
                 }
             }
         }

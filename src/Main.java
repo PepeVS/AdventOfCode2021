@@ -1,6 +1,7 @@
 import Day1.Day1;
 import Day2.Day2;
 import Day3.Day3;
+import Day4.Day4;
 
 import java.io.IOException;
 
@@ -40,7 +41,12 @@ public class Main {
                 }
                 break;
             case 4:
-
+                exercice = vw.SeleccionarEjercicio();
+                if(exercice == 1){
+                    Day4.ejercicio1();
+                }else{
+                    Day4.ejercicio2();
+                }
                 break;
             default :
 

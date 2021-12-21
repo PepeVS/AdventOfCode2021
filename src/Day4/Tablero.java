@@ -22,11 +22,11 @@ public class Tablero {
         int columna, fila;
         int contador;
         do{
-            posicion++;
+            posicion = posicion +1;
             if(tablero[posicion] == num){
                 tablero[posicion] = -num;
             }
-        }while(tablero[posicion] != num);
+        }while(tablero[posicion] != num && posicion + 1 < 25);
 
         if (posicion <= 24) {
 
@@ -57,10 +57,10 @@ public class Tablero {
         boolean addNumero = false;
         int posicion = -1;
         int columna, fila;
+        int count;
         if (!hasWon){
-
             do{
-                posicion++;
+                posicion = posicion +1;
                 if(tablero[posicion] == num){
                     if (num > 0) {
                         tablero[posicion] = -num;
@@ -68,13 +68,14 @@ public class Tablero {
                         tablero[posicion] = Integer.MIN_VALUE;
                     }
                 }
-            }while(tablero[posicion] != num);
+            }while(tablero[posicion] != num && posicion + 1 < 25);
 
             if (posicion <= 24) {
                 columna = posicion % 5;
                 fila = Math.floorDiv(posicion, 5);
 
-                int count = 0;
+                count = 0;
+
                 for (int i = 0; i < 5; i++) {
                     count += tablero[fila * 5 + i] < 0 ? 1 : 0;
                 }
