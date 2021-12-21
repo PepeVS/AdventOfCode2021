@@ -41,9 +41,9 @@ public class Day4 {
 
         for (String number: numeros.split(",")) {
             int numInt = Integer.parseInt(number);
-            for (Tablero b: tableros) {
-                if (b.addNum(numInt)) {
-                    System.out.println(b.caloWinningBoard(numInt));
+            for (Tablero tablero: tableros) {
+                if (tablero.addNum(numInt)) {
+                    System.out.println(tablero.calTableroCompleto(numInt));
                     System.exit(0);
                 }
             }
@@ -59,8 +59,11 @@ public class Day4 {
         int lineNum = 0;
         String line;
         String numbers = "";
-        List<Tablero> boards = new ArrayList<>();
-        Tablero currentBoard = null;
+        List<Tablero> tableros = new ArrayList<>();
+        Tablero tableroActual = null;
+        Tablero tableroCompleto = null;
+        int numero = 0;
+        int tablerosCompletos = 0;
 
         while ((line = br.readLine()) != null) {
             if (lineNum == 0) {
@@ -69,43 +72,53 @@ public class Day4 {
                 continue;
             }
             if (line.isBlank()) {
-                if (currentBoard != null) {
-                    boards.add(currentBoard);
+                if (tableroActual != null) {
+                    tableros.add(tableroActual);
                 }
-                currentBoard = new Tablero();
+                tableroActual = new Tablero();
                 continue;
             }
 
-            currentBoard.addLinia(line);
+            tableroActual.addLinia(line);
 
             lineNum++;
         }
 
-        if (currentBoard != null) {
-            boards.add(currentBoard);
-        }
+        if (tableroActual != null) {
+            tableros.add(tableroActual);
 
-        Tablero winningBoard = null;
-        int winningNum = 0;
-        int numOfWinningBoards = 0;
+            for (String num: numbers.split(",")) {
+                int numInt = Integer.parseInt(num);
+                for (Tablero tablero: tableros) {
+                    if (tablero.addNum2(numInt)) {
+                        tableroCompleto = tablero;
+                        numero = numInt;
+                        tablerosCompletos++;
+                        if (tablerosCompletos == tableros.size()) {
 
-        outerloop:
-        for (String num: numbers.split(",")) {
-            int numInt = Integer.parseInt(num);
-            for (Tablero b: boards) {
-                if (b.addNum2(numInt)) {
-                    winningBoard = b;
-                    winningNum = numInt;
-                    numOfWinningBoards++;
-                    if (numOfWinningBoards == boards.size()) {
-                        break outerloop;
+                        }
+                    }
+                }
+            }
+        } else {
+            for (String num: numbers.split(",")) {
+                int numInt = Integer.parseInt(num);
+                for (Tablero tablero: tableros) {
+                    if (tablero.addNum2(numInt)) {
+                        tableroCompleto = tablero;
+                        numero = numInt;
+                        tablerosCompletos++;
+                        if (tablerosCompletos == tableros.size()) {
+
+                        }
                     }
                 }
             }
         }
 
-        if (winningBoard != null) {
-            System.out.println(winningBoard.caloWinningBoard(winningNum));
+
+        if (tableroCompleto != null) {
+            System.out.println(tableroCompleto.calTableroCompleto(numero));
         }
 
         System.exit(-1);

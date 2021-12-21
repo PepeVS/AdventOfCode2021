@@ -101,7 +101,7 @@ public class Tablero {
         return addNumero;
     }
 
-    public int caloWinningBoard (int lastNum) {
+    public int calTableroCompleto (int lastNum) {
         int contador = 0;
         int total;
         for (int i = 0; i < 25; i++) {

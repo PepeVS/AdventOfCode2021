@@ -44,12 +44,11 @@ public class Main {
                 exercice = vw.SeleccionarEjercicio();
                 if(exercice == 1){
                     Day4.ejercicio1();
-                }else{
-                    Day4.ejercicio2();
                 }
                 break;
             default :
-
+                System.out.printf("\nSortir");
+                break;
         }
     }
 }
